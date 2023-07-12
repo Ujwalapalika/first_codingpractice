@@ -15,7 +15,7 @@ const intialDBserver = async () => {
       console.log("server running");
     });
   } catch (e) {
-    console.log(`DB Error:${e.message}`
+    console.log(`DB Error:${e.message}`)
     process.exit(1);
     
   }
@@ -48,7 +48,7 @@ app.get("/movies/", async (request, response) => {
 app.post("/movies/",async(request,response)=>{
     const movieadd=request.body;
     const{
-        {
+        
             directorId,
             movieName,
             leadActor 
@@ -64,8 +64,8 @@ app.post("/movies/",async(request,response)=>{
 
 app.get("/movies/:movieId/",async(request,response)=>{
     const {movie_id}=request.params;
-    const moviequery=`select * from movie where movieid=${movie_id}`;
-    const dbresponse=await db.get(moviequery);
+    const moviequery=`select * from movie where movieid=`${movie_id}``;
+     const dbresponse=await db.get(moviequery);
     response.send(movienamefn(dbresponse));
 });
 app.put("/movies/:movieId/",async(request,response)=>{
@@ -76,7 +76,7 @@ app.put("/movies/:movieId/",async(request,response)=>{
             movieName,
             leadActor 
     }=movieupdate;
-    const movieupdatequery=`update movie set director_id=`${directorId}`,movie_name`${movieName}`,lead_actor=`${leadActor}` where movieid=${movie_id}`;
+    const movieupdatequery=`update movie set director_id=`${directorId}`,movie_name`${movieName}`,lead_actor=`${leadActor}` where movieid=`${movie_id}``;
     const dbresponse=await db.run(movieupdatequery);
     response.send("Movie Details Updated");
 });
